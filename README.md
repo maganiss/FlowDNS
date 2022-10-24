@@ -1,4 +1,4 @@
-## FlowDNS:
+## FlowDNS: Correlating Netflow and DNS Streams at Scale
 
 ### How FlowDNS Works:
 
