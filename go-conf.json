@@ -1,0 +1,19 @@
+{
+	"NumSplit": 10,
+	"NumCols": 15,
+	"SrcipIndex": 4,
+	"DstipIndex": 5,
+	"TimestampIndex": 12,
+	"PacketsIndex": 13,
+	"BytesIndex": 14,
+	"DNSPipes": ["D1","D2"],
+	"NetflowPipes": ["A","B","X","Y","Z"],
+	"OutPath": ".",
+	"CNAME_ClearUpInterval": 7200,
+	"A_ClearUpInterval" : 3600,
+	"CDNs" : ["dssott","dazn"],
+	"NumFillUpWorkers" : 20,
+	"NumLookUpWorkers" : 40,
+	"NumWriteWorkers" : 2,
+	"NumCpus":40
+}
