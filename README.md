@@ -1,6 +1,6 @@
-## Correlation Engine:
+## FlowDNS:
 
-### How the Correlation Engine Works:
+### How FlowDNS Works:
 
 The goal is to be able to categorize source of the traffic by their service, e.g. to understand what fraction of the traffic is originated by Netflix, Amazon Prime, Disney Plus, etc.
 To realize this, we look for the srcIP of the Netflow records in the answer section of the A/AAAA DNS records to find the name it corresponds to.
@@ -77,7 +77,7 @@ $ go mod init gocorrelation
 ```
 $ go build
 ```
-4. Prepare the configurations as a JSON file. Look at [this config file](https://github.com/maganiss/FlowDNS/-/blob/master/go-conf.json).
+4. Prepare the configurations as a JSON file. Look at [this config file](https://github.com/maganiss/FlowDNS/blob/master/go-conf.json).
 The configuration file requires the following values:
 
 | Configuration Value | Type | Description
