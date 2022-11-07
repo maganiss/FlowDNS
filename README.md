@@ -1,4 +1,5 @@
 ## FlowDNS: Correlating Netflow and DNS Streams at Scale
+This code is published in relation to our paper presented at CoNEXT 2022. [DOI: 10.1145/3555050.3569135](https://doi.org/10.1145/3555050.3569135)
 
 ### How FlowDNS Works:
 
