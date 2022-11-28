@@ -16,7 +16,7 @@ import (
 	"fmt"
 	"os"
 	"bufio"
-	"concurrent-map"
+	"github.com/orcaman/concurrent-map"
 	"strings"
 	"strconv"
 	"compress/gzip"
