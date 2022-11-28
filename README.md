@@ -71,7 +71,6 @@ Figure 1. Correlation Engine Architecture
 1. Follow the instructions here to install Go: https://go.dev/doc/install
 2. Prepare the go project:
 ```
-$ cd gocorrelation
 $ go mod init gocorrelation
 ```
 3. Generate the Binary file:
