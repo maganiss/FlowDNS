@@ -72,6 +72,7 @@ Figure 1. Correlation Engine Architecture
 2. Prepare the go project:
 ```
 $ go mod init gocorrelation
+$ go mod tidy
 ```
 3. Generate the Binary file:
 ```
