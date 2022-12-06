@@ -208,7 +208,7 @@ func lookup(hm_ip cmap.ConcurrentMap, hm_ip_backup cmap.ConcurrentMap, hm_ip_lon
 
 	// follow the CNAME chain for all the results returned from the last cname lookup.
 	// Since the number of crecs returned by each lookup can be more than one, add it a lookupQ and do while it's non-empty.
-        /*
+    /* Alternative 1: Lookup only without adding to the cache 
 	var lookupQ []string
         lookupQ = append(lookupQ, crecs...)
         for len(lookupQ) != 0 {
@@ -229,8 +229,9 @@ func lookup(hm_ip cmap.ConcurrentMap, hm_ip_backup cmap.ConcurrentMap, hm_ip_lon
                         } else {break}
 			loopCount++
                 }
-        }*/
-
+        }
+        // End Alternative 1 */
+        /* Alternative 2: Lookup and adding to the cache.*/
         for _, crec := range crecs {
                 n1crecs,multiple := deepLookup(hm_cname, hm_cname_backup, hm_cname_long, hm_cname_long_backup, crec)
                 finalmultiple = multiple || finalmultiple
@@ -262,7 +263,7 @@ func lookup(hm_ip cmap.ConcurrentMap, hm_ip_backup cmap.ConcurrentMap, hm_ip_lon
                         }
                 }
         }
-
+        /* End Alternative 2 */
         if finalmultiple { multiplestr = "1"} else {multiplestr = "0"}
         return results, multiplestr
 }
@@ -412,17 +413,6 @@ func readDNS(passive bool, finished chan bool, ipdb []DnsDB, cnamedb []DnsDB, in
 
 
 // Looks up the netflow srcip in the hashmaps and writes the results to wjobs. wjobs will be read by writeWorker.
-/*
-func nfLookup(columns []string,ipdb DnsDB, cnamedb DnsDB, parser string, wjobs chan <- []string, conf Configuration){
-	hm_ip, hm_ip_backup, hm_ip_long := ipdb.hm, ipdb.hm_backup, ipdb.hm_long
-	hm_cname, hm_cname_backup, hm_cname_long := cnamedb.hm, cnamedb.hm_backup, cnamedb.hm_long
-	results, multiple := lookup(hm_ip, hm_ip_backup, hm_ip_long, hm_cname, hm_cname_backup, hm_cname_long, columns[conf.SrcipIndex],conf)
-	if len(results) != 0 {
-		tobewritten := strings.Join(columns,"\t") + "\t" + multiple + "\t['" + strings.Join(results,"','") + "']\n"
-		wjobs <- []string{tobewritten,columns[conf.TimestampIndex]}
-	}
-}
-*/
 func lookUpWorker(ipdb []DnsDB, cnamedb []DnsDB, ljobs <-chan []string, wjobs chan <- []string, conf Configuration){
 	lineCount := 0
 	for true {
@@ -653,8 +643,6 @@ func main() {
 	// Passive for reading from files. Active for reading from live streams/pipes.
 	if passive {
 		//is_gz = true
-		//dnsinpath = "/live/recording/dns_recording/parser_00/archived/@000000000000001631167260.gz"
-		//nfinpath = "/live/recording/netflow_recording/parser_00/archived/@000000000000001631167260.gz"
 		is_gz = false
 		dnsinpath = []string{"./test/testdns.csv"}
 		nfinpath = []string{"./test/testnetflow.csv"}
